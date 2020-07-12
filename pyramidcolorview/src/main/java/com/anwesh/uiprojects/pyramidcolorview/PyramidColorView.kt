@@ -209,4 +209,13 @@ class PyramidColorView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : PyramidColorView {
+            val view : PyramidColorView = PyramidColorView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
