@@ -184,4 +184,26 @@ class PyramidColorView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : PyramidColorView) {
+
+        private val pc : PyramidColor = PyramidColor(0)
+        private val animator : Animator = Animator(view)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            pc.draw(canvas, paint)
+            animator.animate {
+                pc.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            pc.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
